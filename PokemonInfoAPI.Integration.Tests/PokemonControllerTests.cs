@@ -6,11 +6,11 @@ using Xunit;
 
 namespace PokemonInfoAPI.Integration.Tests
 {
-    public class PokemonControllerTests: IClassFixture<TestFixure>
+    public class PokemonControllerTests: IClassFixture<TestServer>
     {
-        private readonly TestFixure _testFixure;
+        private readonly TestServer _testFixure;
 
-        public PokemonControllerTests(TestFixure testFixure)
+        public PokemonControllerTests(TestServer testFixure)
         {
             _testFixure= testFixure;
         }
