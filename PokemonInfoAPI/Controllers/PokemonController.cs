@@ -44,7 +44,7 @@ namespace PokemonInfoAPI.Controllers
                 return pokemonResult.Value;
             }
 
-            return HandleFailure(pokemonResult, name);
+            return StaticHelper.HandleFailure(pokemonResult, name);
         }
 
 
@@ -58,7 +58,7 @@ namespace PokemonInfoAPI.Controllers
 			var pokemonResult = await _pokemonApiClient.GetPokemonAsync(name);
 
             if (!pokemonResult.Succeeded)
-                return HandleFailure(pokemonResult, name);
+                return StaticHelper.HandleFailure(pokemonResult, name);
 
             //Translate is the description is not empty
             if (!string.IsNullOrEmpty(pokemonResult.Value.Description))
@@ -72,29 +72,9 @@ namespace PokemonInfoAPI.Controllers
 
             _logger.LogWarning($"No description found for the given pokemon: {name}");
 
-            return HandleFailure(pokemonResult, name);
+            return StaticHelper.HandleFailure(pokemonResult, name);
         }
 
-        private ContentResult HandleFailure(Result<Pokemon> result, string name)
-		{
-            //TODO: In production will get the error messages from resource file to apply culture specific language
-            _logger.LogWarning($"There is an issue retrieving pokemon information for {name} " +
-                $"Statuscode : {result.ErrorResult.StatusCode} ErrorMessage: {result.ErrorResult.ErrorMessage}");
-
-			if (result.StatusCode == HttpStatusCode.NotFound || result.StatusCode == HttpStatusCode.TooManyRequests)
-			{
-				return new ContentResult
-				{
-					StatusCode = (int?)result.StatusCode,
-					Content = result.ErrorMessage
-				};
-			}
-
-			return new ContentResult
-			{
-				StatusCode = (int?)HttpStatusCode.InternalServerError,
-				Content = "There is an underlying service problem."
-			};
-		}
+        
 	}
 }
