@@ -3,10 +3,10 @@ The code to access the Pokemon information using the pokemon Api's. This is writ
 
 ## Prerequisites
 Below are the pre-requisites to run the code locally:
-* .Net core 3.1 version;
+* .Net core 5 version;
 * **[optional]** git (to clone the project or you can simply download from the github website).
 
-## Instructions
+## Clone Instructions
 Clone the code into your local using the below command:
 Clone the project:
 ```sh
@@ -17,7 +17,7 @@ There are two ways to run this project:
 1. You could open the solution directly in Visual Studio and run the PokemonInfoAPI to run the API. You can run the Tests from Test-->Run All Test Menu.
 
 
-2. You can  the API from the command line
+2. You can build the API from the command line
 Build and run (from the project directory):
 ```sh
 $ dotnet build
