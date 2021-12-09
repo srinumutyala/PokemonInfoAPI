@@ -3,7 +3,7 @@ The code to access the Pokemon information using the pokemon Api's. This is writ
 
 ## Prerequisites
 Below are the pre-requisites to run the code locally:
-* .Net core 3.1 version; for the download see [microsoft website](https://dotnet.microsoft.com/download).
+* .Net core 3.1 version;
 * **[optional]** git (to clone the project or you can simply download from the github website).
 
 ## Instructions
@@ -33,4 +33,4 @@ $ dotnet test
 Below are few things that can be enhanced for production grade code
 * More appropriate exception with tracing ability to trouble shoot issues in the production
 * Retry & Circuit breaker for better resiliency - can introduce the retryable staus code and use Polly policies
-* introduce integration & E2E tests
+* E2E tests
