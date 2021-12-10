@@ -60,7 +60,7 @@ namespace PokemonInfoAPI.Controllers
             {
                 var translator = _translatorFactory.GetFunTranslatorService(TranslatorTypeHelper.DeriveTRanslatorType(pokemonResult.Value));
                 var translatedDescrption = await translator.Translate(pokemonResult.Value.Description);
-                pokemonResult.Value.Description = translatedDescrption.Value?? pokemonResult.Value.Description;
+                pokemonResult.Value.Description = translatedDescrption.Value?? pokemonResult.Value.Description.Sanitize();
 
                 return pokemonResult.Value;
             }

@@ -37,6 +37,8 @@ namespace PokemonInfo.Services.Clients
 
 					var result =  new Pokemon(pokemonObj);
 
+					result.Description = result.Description.Sanitize();
+
 					_cacheManager.Set(name, result);
 
 					return result;
