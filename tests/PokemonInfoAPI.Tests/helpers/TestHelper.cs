@@ -18,9 +18,9 @@ namespace PokemonInfo.Services.Tests
 			var pokemonInfoObj = new PokemonInfoModel()
 			{
 				Name = name,
-				TextEntries = new List<Flavor_Text_Entries>()
+				TextEntries = new List<FlavorTextEntries>()
 				{
-					new Flavor_Text_Entries(){
+					new FlavorTextEntries(){
 					FlavorText = description,
 					Language = new Language() { Name = language }
 				}
