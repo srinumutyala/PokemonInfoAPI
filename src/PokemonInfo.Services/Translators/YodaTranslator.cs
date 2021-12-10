@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using PokemonInfo.Entities;
 using PokemonInfo.Services.Cache;
-using PokemonInfo.Services.Clients;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,16 +11,16 @@ namespace PokemonInfo.Services
 {
 	public class YodaTranslator : ITranslator
 	{
-
 		private readonly IHttpClientFactory _httpClientFactory;
 		private readonly ILogger<YodaTranslator> _logger;
 		private readonly ICacheManager _cacheManager;
+
 		public YodaTranslator(IHttpClientFactory httpClientFactor, ICacheManager cacheManager, 
 			ILogger<YodaTranslator> logger)
 		{
-			this._httpClientFactory = httpClientFactor;
+			_httpClientFactory = httpClientFactor;
 			_cacheManager = cacheManager;
-			this._logger = logger;
+			_logger = logger;
 		}
 
 		public string TranslatorType => TranslatorConstants.Yoda;
@@ -32,8 +31,10 @@ namespace PokemonInfo.Services
 				return cachedTranslation;
 
 			var httpClient = _httpClientFactory.CreateClient("Translation");
+
 			var descriptionToTranslate = new { text = descriptionText };
 			var data = new StringContent(JsonConvert.SerializeObject(descriptionToTranslate), UnicodeEncoding.UTF8, "application/json");
+			
 			using (var response = await httpClient.PostAsync($"yoda.json", data))
 			{
 				var contentStream = await response.Content.ReadAsStreamAsync();

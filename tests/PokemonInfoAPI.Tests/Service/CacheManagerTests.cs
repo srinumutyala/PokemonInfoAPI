@@ -8,6 +8,7 @@ namespace PokemonInfoAPI.Tests
 	public class CacheManagerTests
 	{
 		private Mock<ICacheManager> _cacheManagerMock;
+
 		public CacheManagerTests()
 		{
 			_cacheManagerMock = new Mock<ICacheManager>();
@@ -16,7 +17,7 @@ namespace PokemonInfoAPI.Tests
 		[Fact]
 		public void Cache_returns_value()
 		{
-			//Arrange
+			// Arrange
 			_cacheManagerMock.Setup(s => s.Set(It.IsAny<string>(), It.IsAny<PokemonInfoModel>()))
 				.Callback<string, PokemonInfoModel>((key, cache) =>
 				{
@@ -24,13 +25,13 @@ namespace PokemonInfoAPI.Tests
 						.Returns(true);
 				});
 			var expectedPokemonInfo = new PokemonInfoModel() { Name = "wordamam", IsLegendary = true };
-			//Act
+			
+			// Act
 			_cacheManagerMock.Object.Set("testkey", expectedPokemonInfo);
 			var cachedResult = _cacheManagerMock.Object.TryGetValue("testkey", out PokemonInfoModel actualPokemonInfo);
 
-			//Assert
+			// Assert
 			Assert.Equal(expectedPokemonInfo, actualPokemonInfo);
 		}
-
 	}
 }

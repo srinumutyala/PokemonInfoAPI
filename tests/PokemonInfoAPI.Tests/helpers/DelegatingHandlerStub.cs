@@ -11,6 +11,7 @@ namespace PokemonInfo.Unit.Tests
 	public class DelegatingHandlerStub : DelegatingHandler
 	{
 		private readonly Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> _handlerFunc;
+		
 		public DelegatingHandlerStub()
 		{
 			_handlerFunc = (request, cancellationToken) => Task.FromResult(request.CreateResponse(HttpStatusCode.OK));

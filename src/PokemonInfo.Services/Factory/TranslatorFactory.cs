@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace PokemonInfo.Services.Factory
@@ -9,7 +7,6 @@ namespace PokemonInfo.Services.Factory
 	{
 		private readonly IEnumerable<ITranslator> _translators;
 
-		//We need to register the ITranslator with multiple implementations into IOC container
 		public TranslatorFactory(IEnumerable<ITranslator> funtranslators)
 		{
 			_translators = funtranslators;

@@ -7,7 +7,6 @@ using System.Net.Http;
 
 namespace PokemonInfoAPI
 {
-
 	public class PokemonInfoExceptionFilterAttribute : ExceptionFilterAttribute
     {
         private readonly ILogger<PokemonInfoExceptionFilterAttribute> _logger;
@@ -20,7 +19,8 @@ namespace PokemonInfoAPI
         public override void OnException(ExceptionContext actionExecutedContext)
         {
             HttpStatusCode status = HttpStatusCode.InternalServerError;
-            String message = String.Empty;
+            var message = string.Empty;
+
             var exceptionType = actionExecutedContext.Exception.GetType();
             if (exceptionType == typeof(UnauthorizedAccessException))
             {

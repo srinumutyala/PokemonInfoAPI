@@ -5,12 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using PokemonInfo.Services;
-using PokemonInfo.Services.Cache;
-using PokemonInfo.Services.Clients;
-using PokemonInfo.Services.Factory;
 using PokemonInfoAPI.Middleware;
-using System;
 
 namespace PokemonInfoAPI
 {
@@ -58,7 +53,6 @@ namespace PokemonInfoAPI
 				config.SwaggerEndpoint("/swagger/v1/swagger.json", "Pokemontranslation");
 			});
 			app.UseRouting();
-			//app.UseEndpoints();
 
 			app.UseAuthorization();
 

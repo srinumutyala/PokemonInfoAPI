@@ -9,7 +9,6 @@ using static PokemonInfo.Services.Result;
 
 namespace PokemonInfo.Services
 {
-
 	public class ShakespeareTranslator : ITranslator
 	{
 		private readonly IHttpClientFactory _httpClientFactory;
@@ -19,9 +18,9 @@ namespace PokemonInfo.Services
 		public ShakespeareTranslator(IHttpClientFactory httpClientFactor, ICacheManager cacheManager, 
 			ILogger<ShakespeareTranslator> logger)
 		{
-			this._httpClientFactory = httpClientFactor;
+			_httpClientFactory = httpClientFactor;
 			_cacheManager = cacheManager;
-			this._logger = logger;
+			_logger = logger;
 		}
 
 		public string TranslatorType => TranslatorConstants.Shakespeare;
@@ -52,7 +51,5 @@ namespace PokemonInfo.Services
 				return new ErrorResultContent(response.StatusCode, content);
 			}
 		}
-
-
 	}
 }

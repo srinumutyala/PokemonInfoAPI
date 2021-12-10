@@ -1,13 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using PokemonInfo.Entities;
 using PokemonInfo.Services;
-using PokemonInfo.Services.Cache;
 using PokemonInfo.Services.Factory;
 using PokemonInfoAPI.Helpers;
-using PokemonInfoAPI.Middleware;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace PokemonInfoAPI.Controllers
@@ -16,17 +12,16 @@ namespace PokemonInfoAPI.Controllers
 	[Route("[controller]")]
 	public class PokemonController : ControllerBase
 	{
-
 		private readonly ILogger<PokemonController> _logger;
         private readonly IPokemonApiClient _pokemonApiClient;
         private readonly ITranslatorFactory _translatorFactory;
+
         public PokemonController(IPokemonApiClient pokemonInnfoService, ITranslatorFactory translatorFactory,
              ILogger<PokemonController> logger)
 		{
 			_logger = logger;
             _pokemonApiClient = pokemonInnfoService;
-            _translatorFactory = translatorFactory;
-           
+            _translatorFactory = translatorFactory; 
         }
 
         // GET: pokemon/wormadam
@@ -65,7 +60,7 @@ namespace PokemonInfoAPI.Controllers
             {
                 var translator = _translatorFactory.GetFunTranslatorService(TranslatorTypeHelper.DeriveTRanslatorType(pokemonResult.Value));
                 var translatedDescrption = await translator.Translate(pokemonResult.Value.Description);
-                pokemonResult.Value.Description = translatedDescrption.Value;
+                pokemonResult.Value.Description = translatedDescrption.Value?? pokemonResult.Value.Description;
 
                 return pokemonResult.Value;
             }
@@ -74,7 +69,5 @@ namespace PokemonInfoAPI.Controllers
 
             return StaticHelper.HandleFailure(pokemonResult, name);
         }
-
-        
 	}
 }

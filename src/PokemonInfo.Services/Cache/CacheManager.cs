@@ -1,9 +1,6 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PokemonInfo.Services.Cache
 {
@@ -12,8 +9,7 @@ namespace PokemonInfo.Services.Cache
         private readonly IMemoryCache _memoryCache;
         private readonly MemoryCacheEntryOptions _cacheExpirationOptions;
 
-
-		public CacheManager(IMemoryCache memoryCache, IOptions<PokemonInfo.Entities.MemoryCacheOptions> cacheExpirationOptions)
+		public CacheManager(IMemoryCache memoryCache, IOptions<Entities.MemoryCacheOptions> cacheExpirationOptions)
 		{
 			_memoryCache = memoryCache;
             _cacheExpirationOptions = new MemoryCacheEntryOptions()

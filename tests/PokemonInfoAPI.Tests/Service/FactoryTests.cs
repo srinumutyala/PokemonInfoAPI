@@ -13,11 +13,11 @@ namespace PokemonInfoAPI.Tests
 {
 	public class FactoryTests
 	{
-
 		private List<ITranslator> lstTranslators;
+
 		public FactoryTests()
 		{
-			//Arrange
+			// Arrange
 			Mock<IHttpClientFactory> mockFactory = TestHelper.GetHttpFactoryMock(System.Net.HttpStatusCode.OK, string.Empty);
 			var yodaLogger = new Mock<ILogger<YodaTranslator>>();
 			var shakeSpearLogger = new Mock<ILogger<ShakespeareTranslator>>();
@@ -28,40 +28,33 @@ namespace PokemonInfoAPI.Tests
 			lstTranslators.Add(new ShakespeareTranslator(mockFactory.Object, cacheManager.Object, shakeSpearLogger.Object));
 		}
 
-
 		[Theory]
 		[InlineData("Shakespeare")]
 		[InlineData("Yoda")]
 		public void GetFunTranslatorService_returns_correct_translator(string translatorType)
 		{
-			
-			//Arrange
+			// Arrange
 			var translatorFactory = new TranslatorFactory(lstTranslators.AsEnumerable());
 
-			//Act
+			// Act
 			var result = translatorFactory.GetFunTranslatorService(translatorType);
 
-			//Assert
+			// Assert
 			Assert.NotNull(result);
 			Assert.Equal(result.TranslatorType, translatorType);
-
 		}
 
 		[Fact]
 		public void GetFunTranslatorService_returns_null()
 		{
-
-			//Arrange
+			// Arrange
 			var translatorFactory = new TranslatorFactory(lstTranslators.AsEnumerable());
 
-			//Act
+			// Act
 			var result = translatorFactory.GetFunTranslatorService("unknown");
 
-			//Assert
+			// Assert
 			Assert.Null(result);
-
 		}
-
-
 	}
 }

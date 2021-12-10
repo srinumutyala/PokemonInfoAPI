@@ -1,5 +1,10 @@
 ## PokemonInfoAPI
-The code to access the Pokemon information using the pokemon Api's. This is written in the .Net Core 3.1 using C#.
+The code to access the Pokemon information using the pokemon Api's. This is written in the .Net Core 5.0 using C#.
+
+Example requests would be:
+
+    GET {baseUrl}/pokemon/{name}
+    GET {baseUrl}/pokemon/translated/{name}
 
 ## Prerequisites
 Below are the pre-requisites to run the code locally:

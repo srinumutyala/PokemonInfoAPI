@@ -35,12 +35,14 @@ namespace PokemonInfo.Services.Tests
 		{
 			var mockFactory = new Mock<IHttpClientFactory>();
 			var configuration = new HttpConfiguration();
+
 			var clientHandlerStub = new DelegatingHandlerStub((request, cancellationToken) =>
 			{
 				request.SetConfiguration(configuration);
 				var response = request.CreateResponse(httpStatusCode, expectedPokemon);
 				return Task.FromResult(response);
 			});
+
 			var client = new HttpClient(clientHandlerStub);
 			client.BaseAddress = new Uri("http://example.com");
 

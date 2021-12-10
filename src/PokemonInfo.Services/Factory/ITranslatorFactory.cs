@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PokemonInfo.Services.Factory
+﻿namespace PokemonInfo.Services.Factory
 {
 	public interface ITranslatorFactory
 	{
