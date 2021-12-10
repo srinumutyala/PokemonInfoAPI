@@ -3,13 +3,14 @@ using Moq;
 using PokemonInfo.Entities;
 using PokemonInfo.Services.Cache;
 using PokemonInfo.Services.Clients;
+using PokemonInfo.Services.Tests;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 using static PokemonInfo.Services.Result;
 
-namespace PokemonInfo.Services.Tests
+namespace PokemonInfoAPI.Unit.Tests
 {
 	public class PokemonApiClientTests
 	{

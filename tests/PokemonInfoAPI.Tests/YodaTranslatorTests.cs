@@ -1,34 +1,35 @@
 ﻿using Microsoft.Extensions.Logging;
 using Moq;
 using PokemonInfo.Entities;
+using PokemonInfo.Services;
 using PokemonInfo.Services.Cache;
+using PokemonInfo.Services.Tests;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace PokemonInfo.Services.Tests
+namespace PokemonInfoAPI.Tests
 {
-	public class ShakespeareTranslatorTests
+	public class YodaTranslatorTests
 	{
-
 		private Mock<IHttpClientFactory> mockFactory;
-		private Mock<ILogger<ShakespeareTranslator>> shakespeareLogger;
-		private readonly string translatedDescription = "shakespear translated sample description";
+		private Mock<ILogger<YodaTranslator>> yodaLogger;
+		private readonly string translatedDescription = "yoda translated sample description";
 		private readonly Mock<ICacheManager> cacheManager;
-		public ShakespeareTranslatorTests()
+		public YodaTranslatorTests()
 		{
 			//Arrange
-			shakespeareLogger = new Mock<ILogger<ShakespeareTranslator>>();
+			yodaLogger = new Mock<ILogger<YodaTranslator>>();
 			cacheManager = new Mock<ICacheManager>();
 		}
 
 		[Fact]
-		public async Task ShakespeareTranslator_Translate_returns_translated_description()
+		public async Task YodaTranslator_Translate_returns_translated_description()
 		{
 			//Arrange
-			mockFactory = TestHelper.GetHttpFactoryMock(System.Net.HttpStatusCode.OK, new TranslationModel() { Content = new ContentModel() { Translated = translatedDescription } });
-			var shakespeareTranslator = new ShakespeareTranslator(mockFactory.Object, cacheManager.Object, shakespeareLogger.Object);
+			mockFactory = TestHelper.GetHttpFactoryMock(System.Net.HttpStatusCode.OK, new TranslationModel(){Content = new ContentModel() { Translated = translatedDescription } });
+			var yodaTranslator = new YodaTranslator(mockFactory.Object, cacheManager.Object, yodaLogger.Object);
 
 			cacheManager.Setup(s => s.Set(It.IsAny<string>(), It.IsAny<string>()))
 			.Callback<string, string>((key, cache) =>
@@ -38,7 +39,7 @@ namespace PokemonInfo.Services.Tests
 			});
 
 			//Act
-			var result = await shakespeareTranslator.Translate("sample description");
+			var result = await yodaTranslator.Translate("sample description");
 
 			//Assert
 			Assert.NotNull(result.Value);
@@ -47,9 +48,9 @@ namespace PokemonInfo.Services.Tests
 			//Now check to see if the description available from Cache
 			//if it is not hitting the cache, we should get null reference exception 
 			//These tests can be written more efficiently by introducing the ordered tests
-			shakespeareTranslator = new ShakespeareTranslator(null, cacheManager.Object, shakespeareLogger.Object);
+			yodaTranslator = new YodaTranslator(null, cacheManager.Object, yodaLogger.Object);
 			//Act
-			var cachedResult = await shakespeareTranslator.Translate("sample description");
+			var cachedResult = await yodaTranslator.Translate("sample description");
 
 			//Assert
 			Assert.Equal(translatedDescription, cachedResult.Value);
@@ -58,11 +59,11 @@ namespace PokemonInfo.Services.Tests
 		[Theory]
 		[InlineData("Too Many Requests", HttpStatusCode.TooManyRequests)]
 		[InlineData("Not Found", HttpStatusCode.NotFound)]
-		public async Task ShakespeareTranslator_Translate_returns_errors(string translatedDescription, HttpStatusCode httpStatusCode)
+		public async Task YodaTranslator_Translate_returns_errors(string translatedDescription, HttpStatusCode httpStatusCode)
 		{
 			//Arrange
-			mockFactory = TestHelper.GetHttpFactoryMock(httpStatusCode, new TranslationModel() { Content = new ContentModel() { Translated = translatedDescription } });
-			var yodaTranslator = new ShakespeareTranslator(mockFactory.Object, cacheManager.Object, shakespeareLogger.Object);
+			mockFactory = TestHelper.GetHttpFactoryMock(httpStatusCode, translatedDescription);
+			var yodaTranslator = new YodaTranslator(mockFactory.Object, cacheManager.Object, yodaLogger.Object);
 
 			//Act
 			var result = await yodaTranslator.Translate("sample description");

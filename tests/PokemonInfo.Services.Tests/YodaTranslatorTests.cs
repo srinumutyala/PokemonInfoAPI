@@ -1,16 +1,15 @@
 ﻿using Microsoft.Extensions.Logging;
 using Moq;
 using PokemonInfo.Entities;
+using PokemonInfo.Services;
 using PokemonInfo.Services.Cache;
-using System;
-using System.Collections.Generic;
+using PokemonInfo.Services.Tests;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace PokemonInfo.Services.Tests
+namespace PokemonInfoAPI.Unit.Tests
 {
 	public class YodaTranslatorTests
 	{

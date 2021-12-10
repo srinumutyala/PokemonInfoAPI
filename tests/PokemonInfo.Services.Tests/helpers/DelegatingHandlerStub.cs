@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PokemonInfo.Services.Tests
+namespace PokemonInfo.Unit.Tests
 {
 	public class DelegatingHandlerStub : DelegatingHandler
 	{

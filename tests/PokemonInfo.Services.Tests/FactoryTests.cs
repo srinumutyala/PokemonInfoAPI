@@ -1,13 +1,15 @@
 ﻿using Microsoft.Extensions.Logging;
 using Moq;
+using PokemonInfo.Services;
 using PokemonInfo.Services.Cache;
 using PokemonInfo.Services.Factory;
+using PokemonInfo.Services.Tests;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using Xunit;
 
-namespace PokemonInfo.Services.Tests
+namespace PokemonInfoAPI.Unit.Tests
 {
 	public class FactoryTests
 	{

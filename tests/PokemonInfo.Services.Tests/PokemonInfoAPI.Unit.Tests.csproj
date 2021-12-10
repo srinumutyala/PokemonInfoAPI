@@ -21,8 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PokemonInfo.Services\PokemonInfo.Services.csproj" />
-    <ProjectReference Include="..\PokemonInfoAPI\PokemonInfoAPI.csproj" />
+    <ProjectReference Include="..\..\src\PokemonInfo.Entities\PokemonInfo.Entities.csproj" />
+    <ProjectReference Include="..\..\src\PokemonInfo.Services\PokemonInfo.Services.csproj" />
+    <ProjectReference Include="..\..\src\PokemonInfoAPI\PokemonInfoAPI.csproj" />
   </ItemGroup>
 
 </Project>

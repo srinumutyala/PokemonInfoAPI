@@ -1,5 +1,6 @@
 ﻿using Moq;
 using PokemonInfo.Entities;
+using PokemonInfo.Unit.Tests;
 using System;
 using System.Collections.Generic;
 using System.Net;

@@ -3,7 +3,7 @@ using PokemonInfo.Entities;
 using PokemonInfo.Services.Cache;
 using Xunit;
 
-namespace PokemonInfo.Services.UnitTests
+namespace PokemonInfoAPI.Unit.Tests
 {
 	public class CacheManagerTests
 	{
